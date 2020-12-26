@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="ISO-8859-1">
+ <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> 
+<script src="../static/js/script.js" th:src="@{/js/script.js}"></script> 
+<link rel="stylesheet" type="text/css" media="all"  href="../static/css/mycss.css" th:href="@{/css/mycss.css}" />
+
+<title>Register  here</title>
+</head>
+<body>
+	<h1 class="bg-dark text-white display-2 font-italic">Kunal Khosla A2 </h1>
+	<h2 class="text-dark bg-warning " style="border:solid 10px black;border-radius:50px;margin:auto;width:500px;padding:40px;position:relative;left:30px;padding-left:140px;">Register Form</h2>
+	
+	<article style="width:400px;position:relative;left:520px;">
+		<form name="form" action="#" th:action="@{/register}" method="post" onsubmit="return verify()" th:object="${user}">
+	    
+	    <div>
+	    <label for="firstname" class="form-group">First Name:</label>
+	     <input type="text" name="firstname" class="form-control" required th:field="*{firstname}" />
+	     </div>
+	     
+	     <div>
+	     <label for="lastname" class="form-group">Last Name:</label>
+	     <input type="text"  class="form-control"name="lastname" id="lastname" required th:field="*{lastname}" />
+	     </div>
+	   
+	    
+	    <div class="form-group">
+	    <label for="empId">Employee No.</label>
+	    <input class="form-control" id="empId" type="number"  name="empId"  required th:field="*{empId}"/>
+	    </div>
+	   
+	   <div class="form-group">
+	      <label for="username">Username:</label>
+	      <input class="form-control" id="username" type="text" name="username" required th:field="*{username}"/>
+	   </div>
+	    
+		   <div class="form-group">
+		   		<label for="password">Password</label>
+		   		<input  class="form-control" type="password" id="password" name="password" required/>
+		   </div>
+		   
+		   <div class="form-group">
+		   		<label for="verifyPassword">Verify Password:</label>
+		   		<input class="form-control" type="password" name="verifyPassword" required/>
+		   </div>
+		<div style="width:300px;position:relative;left:30px;">
+		 <input class="btn btn-block btn-success"	type="submit" value="Add User">
+		 <a class="btn btn-block btn-secondary" href="/" th:href="@{/}">Go Back</a>
+		 </div>
+	</form>
+	<br>
+
+	
+	
+	<div th:if="${paramUerror != null}">
+	<div class="alert alert-danger" th:text="${paramUerror}">
+	INVALID USERNAME OR PASSWORD
+	</div>
+	
+</div>
+<div id="error" class="alert alert-danger" style="display:none;"></div>
+	</article>
+</body>
+</html>

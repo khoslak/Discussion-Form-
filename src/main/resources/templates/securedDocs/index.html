@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="ISO-8859-1">
+ <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> 
+
+<title>Index </title>
+</head>
+<body>
+<h1 class="display-2 font-weight-bold bg-dark text-white">Welcome <span class="badge badge-pill badge-danger" style="font-size:40px;position:relative;top:-10px;" th:text="${firstname}">firstname</span></h1>
+
+<div> Employee ID <mark><span class="text-danger font-weight-bold "th:text="${empId}">empid</span></mark></div>
+<span style="position:relative;left:1200px;top:-90px;"><a class="btn btn-danger"href="#" th:href="@{/logout}">Logout</a></span>
+
+<div>
+<h2 class="display-4" style="font-family:Comic Sans MS, Arial, Tahoma, Serif;position:relative;top:-20px;">Create a discussion thread </h2>
+
+
+<form action="/createThread" th:action="@{/createThread}" method="post" >
+<div class="form-group" style="width:500px;">
+<label for="subject">Subject: </label>
+<input type="text" name="subject" id="subject" class="form-control" placeholder="Enter the title !" autofocus required  />
+</div>
+
+<div class="form-group" style="width:700px">
+<label for="content">Content: </label>
+<textarea   name="content" rows="6" cols="40" required  class="form-control" id="content" placeholder="Enter the content"> </textarea>
+</div>
+
+<div style="width:300px;">
+<input class="btn btn-success btn-block" type="submit" value="submit" />
+</div>
+
+
+
+</form>
+
+</div>
+<hr>
+
+<h2 class="display-4" style="position:relative;left:450px;"> See All Discussions </h2>
+<br>
+<div style="position:relative;left:360px;width:300px;">
+<a  class="btn btn-secondary btn-block" href="/latDiscussion" th:href="@{/latDiscussion}">See Latest Discussion</a>
+<span style="position:relative;left:370px;top:-39px;"><a   class="btn btn-info btn-block" href="/prevDiscussion" th:href="@{/prevDiscussion}">See Old Discussion</a></span>
+</div>
+<div style="position:relative;left:300px;">
+
+<div th:each="myThread : ${threadlist}">
+
+<article style="background-color: #ffb3b3;width:800px;border-radius: 15px 50px 30px;" >
+<div style="height:40px;width:800px;" class="text-white bg-danger font-weight-bold">
+<span style="position:relative;left:20px;" th:text="${myThread.id}"></span>  
+<span style="position:relative;left:100px;"th:text="${myThread.subject}" >[[${myThread.subject}]]</span> 
+<span style="position:absolute;left:700px;" th:text="${myThread.createDate}"> </span>	
+</div>
+<div class="text-dark" style="width:700px;padding-left:10px;padding-top:10px;">
+		[[${myThread.content}]]
+		<br>
+		<span class="badge badge-pill badge-primary"style="position:relative;left:600px">- [[${myThread.user.username}]]</span>
+</div>
+<div style="position:relative;left:13px;top:10px;">
+<a class="btn btn-warning " th:href="@{/viewComments/}+${myThread.id}">View/Add Comments
+					 </a>
+</div>
+<br><br>
+
+</article>
+<br><br>
+</div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
